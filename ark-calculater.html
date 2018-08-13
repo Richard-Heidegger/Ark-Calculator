@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ark Calculator</title>
+</head>
+<body scroll="no">
+    <form class="box">
+        <h1>Nahrungs-Calculator</h1>
+        <section class="bereich-1">
+            <label for="raw">Rohes Fleisch</label>
+            <input id="raw" type="radio" value="Raw Meat" name="food">
+            <label for="coocked">Gekochtes Fleisch</label>
+            <input type="radio" id="coocked" value="Coocked Meat" name="food">
+            <label for="berrie">Beeren</label>
+            <input type="radio" id="kibble" value="berrie" name="food">
+        </section>
+        <section class="bereich-2">
+            <label for="amount">Menge an Food:</label>
+            <input class="input-zahl j-zahl-1" id="amount" type="number"><br>
+            <label for="consumption">Wie lange dauert es (in sekunden) bis er ein neues Food Frisst:</label>
+            <input class="input-zahl j-zahl-2" id="consumption" type="number">
+        </section>
+        <button class="berechnen">Berechnen</button>
+        <p>Dein Dino braucht in <span class="output stunden">1</span> Stunden und <span class="output minuten">30</span> Minuten wieder was zu Essen.</p>
+    </form>
+    
+</body>
+<style>
+    * {
+        box-sizing: border-box;
+        font-family: Arial, Helvetica, sans-serif;
+        text-align: center;
+    }
+    body {
+        background-color: mediumseagreen;
+        overflow: hidden;
+    }
+
+    h1, h2 {
+        margin-bottom: 50px;
+        
+    }
+
+    .input-zahl {
+        width: 50px;
+        margin-top: 20px;
+        border: none;
+        border-radius: 3px;
+    }
+
+    .bereich-1 {
+        margin: 0 auto;
+    }
+
+    .bereich-2 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 40px;
+    }
+
+    .box {
+        max-width: 500px;
+        margin: 100px auto;
+        display: flex;
+        flex-direction: column;
+        background-color: palegreen;
+        padding: 30px;  
+        border: 2px double black;
+        border-radius: 10px;
+    }
+
+    .berechnen {
+        
+        margin: 50px;
+        display: flex;
+        align-self: center;
+        text-align: center;
+        border-radius: 5px;
+        background-color: mediumseagreen;
+        padding: 5px;
+        border: 2px solid black;
+        color: white;
+        letter-spacing: 2px;
+        text-align: center;
+        font-weight: bold;
+        font-size: 15px;
+    }
+
+    .berechnen:hover {
+        background-color: pink;
+        border-color: purple;
+        color: red;
+    }
+
+    .output {
+        color: red;
+        font-weight: bold;
+    }
+</style>
+<script>
+    window.onload = function(){
+
+        document.querySelector(".berechnen").addEventListener("click",function(_e){
+            _e.preventDefault();
+//verfall roh 40min geko 1h20 kibble 12d
+            var beere = 30;
+            var rohes_fleisch = 50;
+            var gekochtes_fleisch = 30;            
+            var menge = document.querySelector(".j-zahl-1").value;
+            var verbrauch = document.querySelector(".j-zahl-2").value;
+            var stacks = menge / 20;
+
+            if(document.querySelector("#raw").checked){
+                var y = menge * 2400;
+                
+                var z = 2400 / verbrauch + stacks;
+                console.log(z);
+
+                var x = y / z;
+                var m = x / 60;
+                var stunden = m / 60;
+                var minuten = m % 60;
+                console.log(stunden);
+                console.log(minuten);
+                
+            };
+
+            document.querySelector(".stunden").innerHTML = parseInt(stunden);
+            document.querySelector(".minuten").innerHTML = parseInt(minuten);
+
+        });
+
+    };
+
+</script>
+</html>
